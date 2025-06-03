@@ -16,8 +16,6 @@ body, html {
     display: flex;
     width: 145px;
     align-items: center;
-    gap: 5px;
-    margin-top: 10px;
 }
 
 #container {
@@ -161,6 +159,21 @@ body, html {
 }
 
 .chat-list {
+    display: flex;
+    flex-direction: column;
+}
+
+#inf {
+    gap: 7px;
+    padding: 7px;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    bottom: 0;
+}
+#sup {
+    gap: 7px;
+    padding: 7px;
     display: flex;
     flex-direction: column;
 }

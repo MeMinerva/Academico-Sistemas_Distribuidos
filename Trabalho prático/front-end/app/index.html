@@ -9,51 +9,54 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    
     <div id="wrapper">
         <div id="menu">
-            <div class="icon" id="botao-conversas">
-                <div class="img-icon">
-                    <img src="icons/chat.png" width="17px" height="17px">
+            <div id="sup">
+                <div class="icon" id="botao-conversas">
+                    <div class="img-icon">
+                        <img src="icons/chat.png" width="17px" height="17px">
+                    </div>
+                    <div class="icon-text">
+                        <h5>Contatos</h5>
+                    </div>
                 </div>
-                <div class="icon-text">
-                    <h5>Conversas</h5>
-                </div>
-            </div>
-            <div class="icon" id="botao-grupos">
-                <div class="img-icon">
-                    <img src="icons/group.png" width="30px" height="30px" padding-left="20px">
-                </div>
-                <div class="icon-text">
-                    <h5>Grupos</h5>
-                </div>
-
-            </div>
-            <div class="icon" id="botao-sobre">
-                <div class="img-icon">
-                    <img src="icons/image.png" width="22px" height="22px" padding-left="20px">
-                </div>
-                <div class="icon-text">
-                    <h5>Sobre</h5>
+                <div class="icon" id="botao-grupos">
+                    <div class="img-icon">
+                        <img src="icons/group.png" width="30px" height="30px" padding-left="20px">
+                    </div>
+                    <div class="icon-text">
+                        <h5>Grupos</h5>
+                    </div>
                 </div>
             </div>
-             <div class="icon" id="botao-sair">
-                <div class="img-icon">
-                    <img src="icons/sair.png" width="17px" height="17px" padding-left="30px">
+            <div id="inf">
+                <div class="icon" id="botao-sobre">
+                    <div class="img-icon">
+                        <img src="icons/image.png" width="22px" height="22px" padding-left="20px">
+                    </div>
+                    <div class="icon-text">
+                        <h5>Sobre</h5>
+                    </div>
                 </div>
-                <div class="icon-text">
-                    <h5>Sair</h5>
+                <div class="icon" id="botao-sair">
+                    <div class="img-icon">
+                        <img src="icons/sair.png" width="17px" height="17px" padding-left="30px">
+                    </div>
+                    <div class="icon-text">
+                        <h5>Sair</h5>
+                    </div>
                 </div>
             </div>
         </div>
         <div id="container">
             <div id="info-container">
-                 <p>Por favor, clique em um ícone acima para ver o conteúdo.</p>
             </div>
             <div id="chat-container">
                 <img src="icons/giphy.gif" id="gif" />
                 <h2 style="margin-bottom: 0; color: rgb(70, 70, 70);">✨ Aplicativo de mensagens ✨</h2>
                 <p style="margin-top: 0; color: rgb(150, 150, 150)"><b>By: Pedrinho</b> e Maria <b>(Minerva)</b> Eduarda</p>
+                <p style="margin-bottom: 5; font-size: smaller ;color: rgb(150, 150, 150); position: fixed; bottom: 0;">Para mais informações, acessor o 'Sobre'!</p>
+
             </div>
         </div>
     </div>
@@ -70,7 +73,7 @@
                     if (botao.id === 'botao-conversas') {
                         infoContainer.innerHTML = `
                         <div class="aa">
-                            <h3>Conversas</h3>
+                            <h3>Contatos</h3>
                             <div class="icon2">
                             <div class="img-icon" id:"add">
                                 <img src="icons/mais.png" width="30px" height="30px" margin-left="20px">
