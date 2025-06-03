@@ -1,0 +1,166 @@
+body, html {
+    margin: 0;
+    height: 100%;
+    font-family: "Poppins", sans-serif; /* Usando a fonte que configuramos */
+}
+
+#wrapper {
+    display: flex;
+    height: 100vh;
+    background-color: rgb(215, 215, 215);
+
+}
+
+#menu {
+    flex-direction: column;
+    display: flex;
+    width: 145px;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+#container {
+  display: flex;
+  flex: 1;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;  
+  border-color: 3px solid rgb(209, 209, 209);
+  overflow: hidden;                     /* garante que filhos não escapem do border-radius */
+    box-shadow: rgba(0, 0, 0, 0.400) 0px 1px 3px;
+}
+
+#info-container {
+    min-width: 275px;
+    width: 30%;
+    background-color: rgb(245, 245, 245);
+    border-right: 1px solid rgb(200, 200, 200);
+    padding: 20px;    
+}
+#info-container h3 {
+     color: rgb(41, 41, 41);
+    margin: 0px;
+    font-weight: 700;
+}
+
+#chat-container {
+    width: 70%;
+    background-color: rgb(233, 233, 233);
+    border-left: 1px solid rgb(200, 200, 200);
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+#chat-container h2 {
+    font-weight: 700;
+}
+.icon {
+    width: 130px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px;
+    gap: 2px;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
+
+
+    /* ATUALIZADO: A transição agora se aplica à cor da borda também */
+    transition: border-left-color 0.3s ease;
+}
+
+.icon2 {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px;
+    gap: 2px;
+}
+
+.icon2:hover {
+    cursor: pointer;
+    background-color: rgb(230, 230, 230);
+
+}
+
+.icon:hover {
+    cursor: pointer;
+    background-color: rgb(200, 200, 200);
+}
+
+.img-icon {
+    height: 30px;
+    width: 30px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.icon-text {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    width: 90px;
+
+}
+.icon-text h5{
+    
+    
+    font-weight:300; 
+
+
+}
+.icon.selecionado {
+    background-color: rgb(200, 200, 200);
+    border-left-color: #fa00bb; /* Um tom de rosa forte e moderno */
+}
+
+#gif {
+    width: 250px;
+    height: 250px;
+    border-radius: 10px;
+}
+
+/* 1. Transforma a div principal ".aa" em um contêiner flexível */
+.aa {
+  display: flex;                 /* Ativa o modo Flexbox */
+  justify-content: space-between;/* Cria espaço máximo entre os itens (joga um para cada lado) */
+  align-items: center;           /* Alinha verticalmente os itens ao centro */
+  
+  /* Apenas para visualização */
+  border-bottom: 2px solid rgb(230, 230, 230);
+  padding-bottom: 5px;
+}
+
+/* 2. Remove a margem padrão do H3 para um alinhamento perfeito */
+.aa h3 {
+  margin: 0;
+}
+
+/* 3. Estiliza a imagem que estava com atributos no HTML */
+.icon2 img {
+  width: 30px;
+  height: 30px;
+  display: block; /* Remove pequenos espaços em branco que a imagem possa ter embaixo */
+  cursor: pointer; /* Muda o mouse para indicar que é clicável */
+}
+
+.chat {
+    background-color: rgb(240, 240, 240);;
+    height: 75px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.chat-list {
+    display: flex;
+    flex-direction: column;
+}
