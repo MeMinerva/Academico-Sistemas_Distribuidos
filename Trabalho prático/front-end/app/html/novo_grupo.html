@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Novo Grupo</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            padding: 20px;
+            max-width: 500px;
+            margin: auto;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        select[multiple] {
+            height: 120px;
+        }
+        button {
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        h2 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Criar Novo Grupo</h2>
+
+    <form id="form-novo-grupo">
+        <label for="nome-grupo">Nome do Grupo</label>
+        <input type="text" id="nome-grupo" placeholder="Digite o nome do grupo" required>
+
+        <label for="usuarios-grupo">Selecione os Usuários</label>
+        <select id="usuarios-grupo" multiple required>
+            <!-- Opções serão preenchidas via JavaScript -->
+        </select>
+
+        <button type="submit">Criar Grupo</button>
+    </form>
+
+    <script>
+        // Exemplo de usuários (trocar por fetch se for dinâmico)
+        const usuarios = [
+            { id: 1, nome: 'Maria' },
+            { id: 2, nome: 'João' },
+            { id: 3, nome: 'Pedro' },
+            { id: 4, nome: 'Ana' }
+        ];
+
+        const select = document.getElementById('usuarios-grupo');
+
+        usuarios.forEach(user => {
+            const option = document.createElement('option');
+            option.value = user.id;
+            option.textContent = user.nome;
+            select.appendChild(option);
+        });
+
+        document.getElementById('form-novo-grupo').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const nomeGrupo = document.getElementById('nome-grupo').value;
+            const usuariosSelecionados = Array.from(select.selectedOptions).map(opt => opt.value);
+
+            console.log('Nome do grupo:', nomeGrupo);
+            console.log('Usuários selecionados:', usuariosSelecionados);
+
+            // Aqui você pode usar fetch ou ipcRenderer para enviar os dados
+            // Exemplo com Electron (descomente se estiver usando):
+            /*
+            const { ipcRenderer } = require('electron');
+            ipcRenderer.send('criar-grupo', {
+                nome: nomeGrupo,
+                usuarios: usuariosSelecionados
+            });
+            */
+        });
+    </script>
+
+</body>
+</html>
