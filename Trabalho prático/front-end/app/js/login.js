@@ -1,10 +1,12 @@
+const API_BASE_URL = 'https://withdrawal-attempt-fabrics-stock.trycloudflare.com'; // Altere se necessário
+let AUTH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvYW8uc2lsdmFAZXhhbXBsZS5jb20iLCJuYW1laWQiOiIzIiwibmJmIjoxNzQ4OTY2NjMwLCJleHAiOjE3NDkwNTMwMzAsImlhdCI6MTc0ODk2NjYzMCwiaXNzIjoiV2hhdHNSdXJhbC5TZXJ2ZXIifQ.2t7zKBLJn-h40HBgw972MLYVba-rMg0bIiVv6mMB9Ys"; // Seu token de autenticação
+let MEU_USER_ID = null;      // Será extraído do token JWT
+
 document.addEventListener("DOMContentLoaded", function () {
     const loginContainer = document.getElementById('login-container');
     const registerContainer = document.getElementById('register-container');
     const wrapper = document.getElementById('wrapper');
 
-    // Carrega a página de login
-    console.log('Carregando página de login...');
     fetch('html/loginpage.html')
         .then(response => response.text())
         .then(data => {
@@ -21,16 +23,17 @@ document.addEventListener("DOMContentLoaded", function () {
             loginButton.addEventListener('click', async () => {
                 const email = document.getElementById('email').value;
                 const password = document.getElementById('password').value;
-
+                alert(JSON.stringify({ email, password }));
                 try {
-                    const response = await fetch('https://piece-ic-gender-challenging.trycloudflare.com/login', {
+                    const response = await fetch(`${API_BASE_URL}/login`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'authentication': 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvYW8uc2lsdmFAZXhhbXBsZS5jb20iLCJuYW1laWQiOiIzIiwibmJmIjoxNzQ4OTY2NjMwLCJleHAiOjE3NDkwNTMwMzAsImlhdCI6MTc0ODk2NjYzMCwiaXNzIjoiV2hhdHNSdXJhbC5TZXJ2ZXIifQ.2t7zKBLJn-h40HBgw972MLYVba-rMg0bIiVv6mMB9Ys'
-                        },
-                        body: JSON.stringify({ email, password })
-                    });
+                            'authentication': `bearer ${AUTH_TOKEN}`,
+                        
+                    },
+                    body: JSON.stringify({ email, password })
+                });
 
                     if (response.ok) {
                         loginContainer.style.display = 'none';
@@ -45,7 +48,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
 
-    // Carrega a página de registro
     fetch('html/registerpage.html')
         .then(response => response.text())
         .then(data => {
@@ -69,11 +71,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 errorBox.style.display = 'none';
 
                 try {
-                    const response = await fetch('https://piece-ic-gender-challenging.trycloudflare.com/register', {
+                    const response = await fetch(`${API_BASE_URL}/register`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'authentication': 'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvYW8uc2lsdmFAZXhhbXBsZS5jb20iLCJuYW1laWQiOiIzIiwibmJmIjoxNzQ4OTY2NjMwLCJleHAiOjE3NDkwNTMwMzAsImlhdCI6MTc0ODk2NjYzMCwiaXNzIjoiV2hhdHNSdXJhbC5TZXJ2ZXIifQ.2t7zKBLJn-h40HBgw972MLYVba-rMg0bIiVv6mMB9Ys'
+                            'authentication': `bearer ${AUTH_TOKEN}`
                         },
                         body: JSON.stringify({
                             name: newUsername,

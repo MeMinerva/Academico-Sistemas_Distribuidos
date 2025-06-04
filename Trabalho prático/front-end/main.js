@@ -15,6 +15,8 @@ function createMainWindow() {
     });
     Menu.setApplicationMenu(null);
     mainWindow.loadFile('app/index.html');
+    mainWindow.webContents.openDevTools();
+
 }
 
 ipcMain.on('init-chat', () => {
@@ -80,3 +82,4 @@ app.whenReady().then(() => {
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') app.quit();
 });
+

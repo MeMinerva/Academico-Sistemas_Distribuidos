@@ -1,7 +1,7 @@
 // --- CONSTANTES E VARIÁVEIS GLOBAIS ---
-const API_BASE_URL = 'https://piece-ic-gender-challenging.trycloudflare.com'; // Altere se necessário
-let authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvYW8uc2lsdmFAZXhhbXBsZS5jb20iLCJuYW1laWQiOiIzIiwibmJmIjoxNzQ4OTY2NjMwLCJleHAiOjE3NDkwNTMwMzAsImlhdCI6MTc0ODk2NjYzMCwiaXNzIjoiV2hhdHNSdXJhbC5TZXJ2ZXIifQ.2t7zKBLJn-h40HBgw972MLYVba-rMg0bIiVv6mMB9Ys"; // Seu token de autenticação
-let MEU_USER_ID = null;      // Será extraído do token JWT
+// const API_BASE_URL = 'https://withdrawal-attempt-fabrics-stock.trycloudflare.com'; // Altere se necessário
+// let AUTH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvYW8uc2lsdmFAZXhhbXBsZS5jb20iLCJuYW1laWQiOiIzIiwibmJmIjoxNzQ4OTY2NjMwLCJleHAiOjE3NDkwNTMwMzAsImlhdCI6MTc0ODk2NjYzMCwiaXNzIjoiV2hhdHNSdXJhbC5TZXJ2ZXIifQ.2t7zKBLJn-h40HBgw972MLYVba-rMg0bIiVv6mMB9Ys"; // Seu token de autenticação
+// let MEU_USER_ID = null;      // Será extraído do token JWT
 let pollingInterval = null;  // Intervalo de polling para lista de chats
 let chatPollingInterval = null; // Intervalo de polling para chat aberto
 
@@ -25,11 +25,11 @@ function parseJwt(token) {
 
 // --- FUNÇÃO: DEFINE MEU_USER_ID A PARTIR DO TOKEN JWT ---
 function definirMeuUserId() {
-    if (!authToken) {
-        console.error("AuthToken não encontrado.");
+    if (!AUTH_TOKEN) {
+        console.error("AUTH_TOKEN não encontrado.");
         return;
     }
-    const tokenPayload = parseJwt(authToken);
+    const tokenPayload = parseJwt(AUTH_TOKEN);
     if (tokenPayload && tokenPayload.nameid) {
         MEU_USER_ID = tokenPayload.nameid.toString();
         console.log("ID do Usuário definido como:", MEU_USER_ID);
@@ -54,7 +54,7 @@ async function buscarEAtualizarMensagens(chatId, chatType) {
 
     try {
         const response = await fetch(messagesEndpoint, {
-            headers: { 'Authorization': `Bearer ${authToken}` }
+            headers: { 'authorization': `Bearer ${AUTH_TOKEN}` }
         });
         if (!response.ok) {
             console.warn(`Polling: Não foi possível buscar mensagens de ${messagesEndpoint} - Status ${response.status}`);
@@ -194,7 +194,7 @@ async function abrirChat(chatId, chatNome, chatType) {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${authToken}`
+                    'authorization': `Bearer ${AUTH_TOKEN}`
                 },
                 body: JSON.stringify(payload)
             });
@@ -272,11 +272,13 @@ function renderizarLista(items, containerSelector, itemType, emptyMessage) {
 
         itemElement.innerHTML = `
             <div class="chat-item-avatar" title="${nome}"><span>${primeiraLetra}</span></div>
-            <div class="chat-item-details">
+            <div class="chat-item-details"
+            >
                 <h6 class="chat-item-name">${nome}</h6>
                 <p class="chat-item-last-message">${ultimaMsgContent || 'Nenhuma mensagem recente'}</p>
             </div>
         `;
+
         // Ao clicar, chama abrirChat com tipo (“conversa” ou “grupo”)
         itemElement.addEventListener('click', () => abrirChat(item.id, item.nome, itemType));
         listContainer.appendChild(itemElement);
@@ -285,7 +287,7 @@ function renderizarLista(items, containerSelector, itemType, emptyMessage) {
 
 // --- FUNÇÃO AUXILIAR PARA CHAMADAS GET COM AUTH ---
 async function fetchApi(endpoint) {
-    if (!authToken) {
+    if (!AUTH_TOKEN) {
         console.error('Erro de autenticação: Token não encontrado.');
         return null;
     }
@@ -293,7 +295,7 @@ async function fetchApi(endpoint) {
         const response = await fetch(`${API_BASE_URL}${endpoint}`, {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${authToken}`
+                'Authorization': `Bearer ${AUTH_TOKEN}`
             }
         });
         if (!response.ok) {
@@ -356,7 +358,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Se já tivermos token e MEU_USER_ID válido, exibe interface principal
-    if (authToken && MEU_USER_ID) {
+    if (AUTH_TOKEN && MEU_USER_ID) {
         if (loginContainer) loginContainer.style.display = 'none';
         if (wrapper) wrapper.style.display = 'flex';
         const botaoConversas = document.getElementById('botao-conversas');
@@ -376,17 +378,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (wrapper) wrapper.style.display = 'none';
             if (loginContainer) loginContainer.style.display = 'flex';
 
-            authToken = null;
-            MEU_USER_ID = null;
 
             if (chatContainer) {
                 chatContainer.innerHTML = `
-                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center;">
-                        <img src="icons/giphy.gif" id="gif" alt="GIF animado de boas-vindas" style="width: 150px; height: auto; margin-bottom: 20px;" />
-                        <h2 style="margin-bottom: 0; color: rgb(70, 70, 70);">✨ Aplicativo de mensagens ✨</h2>
-                        <p style="margin-top: 5px; color: rgb(150, 150, 150)"><b>By: Pedrinho</b> e Maria <b>(Minerva)</b> Eduarda</p>
-                        <p style="margin-top: 20px; font-size: smaller; color: rgb(150, 150, 150); position: absolute; bottom: 10px;">Para mais informações, acesse o 'Sobre'!</p>
-                    </div>
+                    <img src="icons/giphy.gif" id="gif" />
+                <h2 style="margin-bottom: 0; color: rgb(70, 70, 70);">✨ Aplicativo de mensagens ✨</h2>
+                <p style="margin-top: 0; color: rgb(150, 150, 150)"><b>By: Pedrinho</b> e Maria <b>(Minerva)</b> Eduarda
+                </p>
+                <p
+                    style="margin-bottom: 5px; font-size: smaller; color: rgb(150, 150, 150); position: fixed; bottom: 0;">
+                    Para mais informações, acesse o 'Sobre'!</p>
                 `;
             }
             if (infoContainer) infoContainer.innerHTML = '';
@@ -456,7 +457,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ABA “Sobre”
     const botaoSobre = document.getElementById('botao-sobre');
     if (botaoSobre) {
         botaoSobre.addEventListener('click', () => {
