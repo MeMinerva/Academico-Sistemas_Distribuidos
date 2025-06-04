@@ -1,82 +1,58 @@
-/* ----------------------- */
-/*    RESET E TIPOGRAFIA   */
-/* ----------------------- */
 body, html {
     margin: 0;
     height: 100%;
-    font-family: "Poppins", sans-serif;
+    font-family: "Poppins", sans-serif; /* Usando a fonte que configuramos */
+    overflow: hidden;
 }
 
-/* -------------------------- */
-/*   CONTAINERS E LAYOUT BASE */
-/* -------------------------- */
 #wrapper {
     display: flex;
     height: 100vh;
-    background-color: #f0f0f0;
+    background-color: rgb(215, 215, 215);
+
 }
 
-#container {
-    display: flex;
-    flex: 1;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    overflow: hidden;
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 1px 3px;
-}
-
-/* ----------------------- */
-/*        MENU LATERAL     */
-/* ----------------------- */
 #menu {
-    display: flex;
     flex-direction: column;
+    display: flex;
     width: 145px;
-    min-height: 100vh;
     align-items: center;
+    min-height: 100vh;
     position: relative;
 }
 
-#inf, #sup {
-    display: flex;
-    flex-direction: column;
-    gap: 7px;
-    padding: 7px;
+#container {
+  display: flex;
+  flex: 1;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;  
+  border-color: 3px solid rgb(209, 209, 209);
+  overflow: hidden;                     /* garante que filhos não escapem do border-radius */
+    box-shadow: rgba(0, 0, 0, 0.400) 0px 1px 3px;
 }
 
-#inf {
-    margin-top: auto;
-}
-
-/* ---------------------------- */
-/*   ÁREA DE INFORMAÇÕES LATERAL */
-/* ---------------------------- */
 #info-container {
     min-width: 275px;
     width: 30%;
-    background-color: #f9f9f9;
-    border-right: 1px solid #ddd;
-    padding: 20px;
+    background-color: rgb(245, 245, 245);
+    border-right: 1px solid rgb(200, 200, 200);
+    padding: 20px;    
 }
-
 #info-container h3 {
-    margin: 0;
+     color: rgb(41, 41, 41);
+    margin: 0px;
     font-weight: 700;
-    color: #292929;
 }
 
-/* ---------------------------- */
-/*       ÁREA DE CONVERSAS     */
-/* ---------------------------- */
 #chat-container {
-    display: flex;
-    flex-direction: column;
     width: 70%;
     height: 100%;
-    background-color: #fcecf5;
-    border-left: 1px solid #ddd;
+    background-color: rgb(233, 233, 233);
+    border-left: 1px solid rgb(200, 200, 200);
     align-items: center;
     justify-content: center;
+    display: flex;
+    flex-direction: column;
     overflow: auto;
     box-sizing: border-box;
     word-break: break-word;
@@ -87,19 +63,249 @@ body, html {
     max-width: 100%;
 }
 
+
 #chat-container h2 {
     font-weight: 700;
 }
+.icon {
+    width: 130px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px;
+    gap: 2px;
+    border-left: 3px solid transparent;
+    border-right: 3px solid transparent;
 
-/* ---------------------------- */
-/*       CABEÇALHO DO CHAT     */
-/* ---------------------------- */
+
+    /* ATUALIZADO: A transição agora se aplica à cor da borda também */
+    transition: border-left-color 0.3s ease;
+}
+
+.icon2 {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px;
+    gap: 2px;
+}
+
+.icon2:hover {
+    cursor: pointer;
+    background-color: rgb(230, 230, 230);
+
+}
+
+.icon:hover {
+    cursor: pointer;
+    background-color: rgb(200, 200, 200);
+}
+
+.img-icon {
+    height: 30px;
+    width: 30px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.icon-text {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    width: 90px;
+
+}
+.icon-text h5{
+    
+    
+    font-weight:300; 
+
+
+}
+.icon.selecionado {
+    background-color: rgb(200, 200, 200);
+    border-left-color: #fa00bb; /* Um tom de rosa forte e moderno */
+}
+
+#gif {
+    width: 250px;
+    height: 250px;
+    border-radius: 10px;
+}
+
+/* 1. Transforma a div principal ".aa" em um contêiner flexível */
+.aa {
+  display: flex;                 /* Ativa o modo Flexbox */
+  justify-content: space-between;/* Cria espaço máximo entre os itens (joga um para cada lado) */
+  align-items: center;           /* Alinha verticalmente os itens ao centro */
+  
+  /* Apenas para visualização */
+  border-bottom: 2px solid rgb(230, 230, 230);
+  padding-bottom: 5px;
+}
+
+/* 2. Remove a margem padrão do H3 para um alinhamento perfeito */
+.aa h3 {
+  margin: 0;
+}
+
+/* 3. Estiliza a imagem que estava com atributos no HTML */
+.icon2 img {
+  width: 30px;
+  height: 30px;
+  display: block; /* Remove pequenos espaços em branco que a imagem possa ter embaixo */
+  cursor: pointer; /* Muda o mouse para indicar que é clicável */
+}
+
+.chat {
+    background-color: rgb(240, 240, 240);;
+    height: 75px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.chat-list {
+    display: flex;
+    flex-direction: column;
+}
+
+#inf {
+    gap: 7px;
+    margin-top: auto;
+    padding: 7px;
+    display: flex;
+    flex-direction: column;
+    bottom: 0;
+    position: bottom;
+}
+#sup {
+    gap: 7px;
+    padding: 7px;
+    display: flex;
+    flex-direction: column;
+}
+
+#login-container, #register-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+#login-container input, #register-container input {
+    margin: 5px;
+    padding: 10px;
+    width: 200px;
+}
+
+#login-container button, #register-container button {
+    margin-top: 5px;
+    padding: 10px;
+    width: 120px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* --- ESTILOS PARA A LISTA DE CONVERSAS E GRUPOS --- */
+
+/* Garante que a lista possa rolar se o conteúdo for muito grande */
+.chat-list, .group-list {
+    overflow-y: auto;
+    height: 100%; /* Ajuste conforme necessário */
+}
+
+/* Estilo principal para cada item da lista (seja conversa ou grupo) */
+.chat-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f0f0; /* Linha separadora sutil */
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* Efeito ao passar o mouse sobre um item */
+.chat-item:hover {
+    background-color: #f5f5f5;
+}
+
+/* Estilo para o item que está atualmente selecionado (chat aberto) */
+.chat-item.active {
+    background-color: #e8e8e8;
+}
+
+/* Círculo do avatar */
+.chat-item-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #007bff; /* Cor de fundo padrão */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-right: 15px;
+    flex-shrink: 0; /* Impede que o avatar encolha */
+}
+
+/* Container para o nome e a última mensagem */
+.chat-item-details {
+    overflow: hidden; /* Importante para o corte de texto */
+    flex-grow: 1;
+}
+
+/* Nome do contato ou grupo */
+.chat-item-name {
+    font-size: 1em;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+/* Última mensagem */
+.chat-item-last-message {
+    font-size: 0.9em;
+    color: #666;
+    margin: 2px 0 0 0;
+    white-space: nowrap; /* Impede que a mensagem quebre linha */
+    overflow: hidden; /* Esconde o excesso */
+    text-overflow: ellipsis; /* Adiciona "..." no final do texto cortado */
+}
+
+/* Mensagem quando a lista está vazia */
+.empty-list-message {
+    text-align: center;
+    padding: 20px;
+    color: #999;
+}
+
+/* --- ESTILO GERAL DO CONTAINER DO CHAT --- */
+#chat-container {
+    display: flex;
+    flex-direction: column; /* Organiza os filhos (cabeçalho, mensagens, input) verticalmente */
+    height: 100%; /* Ocupa toda a altura do seu container pai ('wrapper') */
+    background-color: #f0f2f5; /* Um cinza claro e neutro para o fundo */
+}
+
+/* --- CABEÇALHO DO CHAT --- */
 #chat-header {
     padding: 10px 20px;
-    width: 100%;
-    background-color: #fff0f7;
+    width: 100%; /* Garante que o cabeçalho ocupe toda a largura do container */
+    background-color: #f9f9f9;
     border-bottom: 1px solid #e0e0e0;
-    flex-shrink: 0;
+    flex-shrink: 0; /* Impede que o cabeçalho encolha */
     display: flex;
     align-items: center;
 }
@@ -111,33 +317,32 @@ body, html {
     color: #333;
 }
 
-/* ---------------------------- */
-/*       LISTA DE MENSAGENS     */
-/* ---------------------------- */
+/* --- LISTA DE MENSAGENS (ÁREA PRINCIPAL) --- */
 #messages-list {
+    width: 90%;
+    height: 100%;
+    overflow-y: auto; /* Adiciona uma barra de rolagem quando as mensagens transbordam */
+    padding: 20px;
     display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    width: 100%;
-    padding: 10px;
-    gap: 1px;
+    flex-direction: column; /* Empilha as mensagens verticalmente */
+    /* Dica: Descomente a linha abaixo para um fundo com padrão, como o do WhatsApp */
+    /* background-image: url('https://i.imgur.com/b4h2c3w.png'); */
 }
 
-/* ---------------------------- */
-/*          MENSAGENS          */
-/* ---------------------------- */
+/* --- BALÕES DE MENSAGEM (GERAL) --- */
+/* --- BALÕES DE MENSAGEM (MODERNIZADO) --- */
+/* --- BALÕES DE MENSAGEM (MODERNIZADO) --- */
 .message {
-    width: fit-content;
-    max-width: 100%;
-    padding: 14px 18px;
-    border-radius: 20px;
-    margin-bottom: 12px;
-    font-size: 0.95em;
-    line-height: 1.5;
-    word-wrap: break-word;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    position: relative;
-    transition: background-color 0.2s ease-in-out;
+  width: fit-content;
+  max-width: 100%;
+  padding: 8px 12px;
+  border-radius: 10px;
+  margin-bottom: 12px;
+  font-size: 0.95em;
+  line-height: 1.5;
+  word-wrap: break-word;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px;
+  position: relative;
 }
 
 .message .sender-name {
@@ -159,72 +364,56 @@ body, html {
     display: block;
 }
 
+/* --- MENSAGEM ENVIADA (REMENTENTE - BRANCO) --- */
 .message.sent {
     align-self: flex-end;
     background-color: #ffffff;
     color: #333;
 }
 
-.message.sent::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    right: -8px;
-    border: 10px solid transparent;
-    border-left-color: #ffffff;
-    border-bottom-color: #ffffff;
-}
 
+/* --- MENSAGEM RECEBIDA (DESTINATÁRIO - ROSA) --- */
 .message.received {
     align-self: flex-start;
     background-color: #ffe4f1;
     color: #333;
 }
 
-.message.received::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: -8px;
-    border: 10px solid transparent;
-    border-right-color: #ffe4f1;
-    border-bottom-color: #ffe4f1;
-}
 
-/* ---------------------------- */
-/*     INPUT DE MENSAGEM       */
-/* ---------------------------- */
+
+/* --- BARRA DE ENTRADA DE MENSAGEM --- */
 #message-input-container {
     display: flex;
     align-items: center;
     padding: 10px 20px;
-    background-color: #fff0f7;
+    background-color: #f9f9f9;
     border-top: 1px solid #e0e0e0;
     flex-shrink: 0;
-    width: 100%;
+    width: 100%; /* <- Isso garante largura total */
 }
 
+
 #message-input {
-    flex-grow: 1;
+    flex-grow: 1; /* O campo de texto ocupa o espaço disponível */
     border: none;
     padding: 12px 15px;
-    border-radius: 20px;
+    border-radius: 20px; /* Bordas arredondadas */
     background-color: #ffffff;
     font-size: 1em;
-    outline: none;
+    outline: none; /* Remove a borda azul ao focar */
     margin-right: 10px;
     border: 1px solid #ddd;
 }
 
 #message-input:focus {
-    border-color: #ff00d4;
+    border-color: #ff00ff; /* Destaca a borda ao focar */
 }
 
 #send-button {
-    background-color: #ff00d4;
+    background-color: #ffa1ce;
     color: white;
     border: none;
-    border-radius: 50%;
+    border-radius: 50%; /* Botão perfeitamente redondo */
     width: 45px;
     height: 45px;
     font-weight: bold;
@@ -233,198 +422,21 @@ body, html {
     display: flex;
     align-items: center;
     justify-content: center;
+    /* flex-shrink: 0; */
+    /* Para um ícone de envio (exigiria FontAwesome ou um SVG) */
+    /* content: '\f1d8'; font-family: 'FontAwesome'; */
 }
 
 #send-button:hover {
-    background-color: #b300b3;
+    background-color: #ff00ff;
 }
 
-/* ---------------------------- */
-/*        ICONES E BOTÕES      */
-/* ---------------------------- */
-.icon, .icon2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 7px;
-    gap: 2px;
-}
-
-.icon {
-    width: 130px;
-    height: 40px;
-    border-left: 3px solid transparent;
-    border-right: 3px solid transparent;
-    transition: border-left-color 0.3s ease;
-}
-
-.icon2 {
-    width: 40px;
-    height: 40px;
-}
-
-.icon:hover {
-    cursor: pointer;
-    background-color: #ffb6d9;
-}
-
-.icon2:hover {
-    cursor: pointer;
-    background-color: #ffe4f1;
-}
-
-.icon.selecionado {
-    background-color: #ffe4f1;
-    border-left-color: #ff00d4;
-}
-
-.img-icon {
-    height: 30px;
-    width: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.icon-text {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 90px;
-}
-
-.icon-text h5 {
-    font-weight: 300;
-}
-
-/* ---------------------------- */
-/*         CHAT LISTA          */
-/* ---------------------------- */
-.chat {
-    background-color: #fbeaf3;
-    height: 75px;
+#messages-list {
     display: flex;
     flex-direction: column;
-    border-radius: 10px;
-    margin: 10px 0;
-}
-
-.chat-list {
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto;
-    height: 100%;
-}
-
-/* ---------------------------- */
-/*     LISTAGEM DE CONVERSAS   */
-/* ---------------------------- */
-.chat-item {
-    display: flex;
-    align-items: center;
-    padding: 10px 15px;
-    cursor: pointer;
-    border-bottom: 1px solid #f0f0f0;
-    transition: background-color 0.2s ease-in-out;
-}
-
-.chat-item:hover {
-    background-color: #ffe4f1;
-}
-
-.chat-item.active {
-    background-color: #ffb6d9;
-}
-
-.chat-item-avatar {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background-color: #ff00d4;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2em;
-    font-weight: bold;
-    margin-right: 15px;
-    flex-shrink: 0;
-}
-
-.chat-item-details {
-    overflow: hidden;
-    flex-grow: 1;
-}
-
-.chat-item-name {
-    font-size: 1em;
-    font-weight: 600;
-    color: #333;
-    margin: 0;
-}
-
-.chat-item-last-message {
-    font-size: 0.9em;
-    color: #666;
-    margin: 2px 0 0 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.empty-list-message {
-    text-align: center;
-    padding: 20px;
-    color: #999;
-}
-
-/* ---------------------------- */
-/*       TELAS DE LOGIN        */
-/* ---------------------------- */
-#login-container, #register-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-}
-
-#login-container input,
-#register-container input {
-    margin: 5px;
+    overflow-y: auto; /* Permite rolagem se necessário */
+    width: 100%;
     padding: 10px;
-    width: 200px;
+    gap: 1px;
 }
 
-#login-container button,
-#register-container button {
-    margin-top: 5px;
-    padding: 10px;
-    width: 120px;
-    background-color: #ff00d4;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-/* ---------------------------- */
-/*         TOPO COM TÍTULO     */
-/* ---------------------------- */
-.aa {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 2px solid #ffe4f1;
-    padding-bottom: 5px;
-}
-
-.aa h3 {
-    margin: 0;
-}
-
-.icon2 img {
-    width: 30px;
-    height: 30px;
-    display: block;
-    cursor: pointer;
-}

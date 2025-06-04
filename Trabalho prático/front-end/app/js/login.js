@@ -1,11 +1,23 @@
-const API_BASE_URL = 'https://withdrawal-attempt-fabrics-stock.trycloudflare.com'; // Altere se necessário
-let AUTH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvYW8uc2lsdmFAZXhhbXBsZS5jb20iLCJuYW1laWQiOiIzIiwibmJmIjoxNzQ4OTY2NjMwLCJleHAiOjE3NDkwNTMwMzAsImlhdCI6MTc0ODk2NjYzMCwiaXNzIjoiV2hhdHNSdXJhbC5TZXJ2ZXIifQ.2t7zKBLJn-h40HBgw972MLYVba-rMg0bIiVv6mMB9Ys"; // Seu token de autenticação
-let MEU_USER_ID = null;      // Será extraído do token JWT
+const API_BASE_URL = 'https://withdrawal-attempt-fabrics-stock.trycloudflare.com'; 
+const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvYW8uc2lsdmFAZXhhbXBsZS5jb20iLCJuYW1laWQiOiIzIiwibmJmIjoxNzQ4OTY2NjMwLCJleHAiOjE3NDkwNTMwMzAsImlhdCI6MTc0ODk2NjYzMCwiaXNzIjoiV2hhdHNSdXJhbC5TZXJ2ZXIifQ.2t7zKBLJn-h40HBgw972MLYVba-rMg0bIiVv6mMB9Ys";
 
 document.addEventListener("DOMContentLoaded", function () {
     const loginContainer = document.getElementById('login-container');
     const registerContainer = document.getElementById('register-container');
     const wrapper = document.getElementById('wrapper');
+
+    function updateView() {
+        const loggedIn = localStorage.getItem('loggedIn');
+        if (loggedIn === 'true') {
+            loginContainer.style.display = 'none';
+            registerContainer.style.display = 'none';
+            wrapper.style.display = 'flex';
+        } else {
+            loginContainer.style.display = 'flex';
+            registerContainer.style.display = 'none';
+            wrapper.style.display = 'none';
+        }
+    }
 
     fetch('html/loginpage.html')
         .then(response => response.text())
@@ -23,21 +35,21 @@ document.addEventListener("DOMContentLoaded", function () {
             loginButton.addEventListener('click', async () => {
                 const email = document.getElementById('email').value;
                 const password = document.getElementById('password').value;
-                alert(JSON.stringify({ email, password }));
+
                 try {
                     const response = await fetch(`${API_BASE_URL}/login`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'authentication': `bearer ${AUTH_TOKEN}`,
-                        
-                    },
-                    body: JSON.stringify({ email, password })
-                });
+                            'authentication': `bearer ${AUTH_TOKEN}`  // usa o token fixo aqui
+                        },
+                        body: JSON.stringify({ email, password })
+                    });
 
                     if (response.ok) {
-                        loginContainer.style.display = 'none';
-                        wrapper.style.display = 'flex';
+                        // Marca como logado localmente
+                        localStorage.setItem('loggedIn', 'true');
+                        updateView();
                     } else {
                         document.getElementById('login-error').style.display = 'block';
                     }
@@ -75,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'authentication': `bearer ${AUTH_TOKEN}`
+                            'authentication': `bearer ${AUTH_TOKEN}`  // token fixo aqui também
                         },
                         body: JSON.stringify({
                             name: newUsername,
@@ -85,8 +97,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     });
 
                     if (response.ok) {
-                        registerContainer.style.display = 'none';
-                        wrapper.style.display = 'flex';
+                        localStorage.setItem('loggedIn', 'true');
+                        updateView();
                     } else if (response.status === 409) {
                         errorBox.textContent = 'Usuário já existe.';
                         errorBox.style.display = 'block';
@@ -101,4 +113,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             });
         });
+
+    updateView();
 });

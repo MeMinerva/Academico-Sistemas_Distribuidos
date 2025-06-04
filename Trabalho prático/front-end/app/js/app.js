@@ -91,7 +91,7 @@ async function buscarEAtualizarMensagens(chatId, chatType) {
                 }
 
                 // Exibe “Eu” se for minha mensagem, ou o sender_id caso contrário
-                const senderName = (senderIdStr === MEU_USER_ID) ? 'Eu' : `ID:${senderIdStr}`;
+                const senderName = (senderIdStr === MEU_USER_ID) ? 'Eu' : `${msg.sender_name}`;
                 const content    = msg.content    || '';
                 const timestamp  = msg.timestamp
                     ? new Date(msg.timestamp).toLocaleTimeString()
@@ -140,7 +140,7 @@ async function abrirChat(chatId, chatNome, chatType) {
         <div id="messages-list"><p class="loading-message">Carregando mensagens...</p></div>
         <div id="message-input-container">
             <input type="text" id="message-input" placeholder="Digite a sua mensagem...">
-            <button id="send-button">Enviar</button>
+            <button id="send-button"><img src="icons/mandar.png" width="25px" height="25px" padding-right="3px"></div></button>
         </div>
     `;
 
@@ -401,13 +401,13 @@ document.addEventListener('DOMContentLoaded', () => {
             title: 'Contatos',
             listContainerClass: 'chat-list',
             fetchFunction: buscarErenderizarConversas,
-            addEventName: 'abrir-nova-conversa'
+            addEventName: 'init-chat' // Evento para abrir nova conversa
         },
         'botao-grupos': {
             title: 'Grupos',
             listContainerClass: 'group-list',
             fetchFunction: buscarErenderizarGrupos,
-            addEventName: 'abrir-novo-grupo'
+            addEventName: 'init-group-chat' // Evento para abrir novo grupo
         }
     };
 
