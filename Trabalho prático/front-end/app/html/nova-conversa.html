@@ -13,6 +13,7 @@
             background-color: rgba(245, 245, 245, 0.494);
             font-family: 'Poppins', sans-serif;
         }
+
         .container {
             display: flex;
             align-items: center;
@@ -23,32 +24,35 @@
             flex-direction: column;
             /* background-color: #68686824; */
         }
+
         #form-nova-conversa h3 {
             text-align: center;
             color: #333;
             font-weight: 700;
         }
+
         #button-container {
             display: flex;
             justify-content: center;
             margin-top: 1rem;
         }
+
         /* --- ESTILOS PARA O FORMULÁRIO --- */
 
-/* --- ESTILOS PARA O FORMULÁRIO --- */
+        /* --- ESTILOS PARA O FORMULÁRIO --- */
 
-:root {
-    --primary-color: #ff00dd;
-    --primary-hover-color: #b300a4;
-    --text-color: #333;
-    --border-color: #ccc;
-    --border-radius: 8px;
-    --input-background: #fff;
-    --input-focus-border: #ff7de1;
-    --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+        :root {
+            --primary-color: #ff00dd;
+            --primary-hover-color: #b300a4;
+            --text-color: #333;
+            --border-color: #ccc;
+            --border-radius: 8px;
+            --input-background: #fff;
+            --input-focus-border: #ff7de1;
+            --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-/* #form-nova-conversa {
+        /* #form-nova-conversa {
     width: 90%;
     max-width: 400px;
     padding: 1.5rem;
@@ -61,64 +65,66 @@
     margin-bottom: 1.25rem;
 } */
 
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    color: var(--text-color);
-}
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-color);
+        }
 
-/* Estilização para INPUT e TEXTAREA com tamanho vertical reduzido */
-input[type="email"],
-textarea {
-    width: 100%;
-    padding: 0.6rem; /* Reduzido */
-    font-family: 'Poppins', sans-serif;
-    font-size: 0.9rem; /* Reduzido */
-    color: var(--text-color);
-    background-color: var(--input-background);
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius);
-    box-sizing: border-box;
-    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-}
+        /* Estilização para INPUT e TEXTAREA com tamanho vertical reduzido */
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 0.6rem;
+            /* Reduzido */
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            /* Reduzido */
+            color: var(--text-color);
+            background-color: var(--input-background);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            box-sizing: border-box;
+            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
 
-/* Efeito de FOCO para ambos */
-input[type="email"]:focus,
-textarea:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px var(--input-focus-border);
-}
+        /* Efeito de FOCO para ambos */
+        input[type="email"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px var(--input-focus-border);
+        }
 
-/* Textarea com tamanho FIXO */
-textarea {
-    min-height: 100px;
-    resize: none; /* Impede o redimensionamento pelo usuário */
-}
+        /* Textarea com tamanho FIXO */
+        textarea {
+            min-height: 100px;
+            resize: none;
+            /* Impede o redimensionamento pelo usuário */
+        }
 
-/* Estilização para o BOTÃO */
-#enviar-conversa {
-    width: 100%;
-    padding: 0.9rem;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #fff;
-    background-color: var(--primary-color);
-    border: none;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out, transform 0.1s ease;
-}
+        /* Estilização para o BOTÃO */
+        #enviar-conversa {
+            width: 100%;
+            padding: 0.9rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+        }
 
-#enviar-conversa:hover {
-    background-color: var(--primary-hover-color);
-}
+        #enviar-conversa:hover {
+            background-color: var(--primary-hover-color);
+        }
 
-#enviar-conversa:active {
-    transform: scale(0.98);
-}
-
+        #enviar-conversa:active {
+            transform: scale(0.98);
+        }
     </style>
 </head>
 
@@ -143,6 +149,9 @@ textarea {
 
 
             <script defer>
+                const API_BASE_URL = 'https://withdrawal-attempt-fabrics-stock.trycloudflare.com';
+                const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pbmVydmFAdWZycmouYnIiLCJuYW1laWQiOiIxMCIsIm5iZiI6MTc0OTA1MTI0MiwiZXhwIjoxNzQ5MTM3NjQyLCJpYXQiOjE3NDkwNTEyNDIsImlzcyI6IldoYXRzUnVyYWwuU2VydmVyIn0.lPKyP7zuGoebvwYNttCZxVJINQPR_QBqsEdhoPWMAcM";
+
                 // 1. Seleciona o formulário e os campos do DOM
                 const form = document.getElementById('form-nova-conversa');
                 const emailInput = document.getElementById('email-contato');
@@ -166,16 +175,15 @@ textarea {
                         content: mensagem,
                         type: "PRIVATE"
                     };
-                    const url = 'https://piece-ic-gender-challenging.trycloudflare.com/message'
+                    const url = `${API_BASE_URL}/message`; // Corrigido para usar backticks
                     // alert(url)
                     try {
                         // 4. Usa backticks (`) para a URL e corrige o nome do header
                         const response = await fetch(url, {
                             method: 'POST',
                             headers: {
-                                'Content-Type': 'application/json',
-                                // 5. O header de autorização padrão é 'Authorization'
-                                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvYW8uc2lsdmFAZXhhbXBsZS5jb20iLCJuYW1laWQiOiIzIiwibmJmIjoxNzQ4OTY2NjMwLCJleHAiOjE3NDkwNTMwMzAsImlhdCI6MTc0ODk2NjYzMCwiaXNzIjoiV2hhdHNSdXJhbC5TZXJ2ZXIifQ.2t7zKBLJn-h40HBgw972MLYVba-rMg0bIiVv6mMB9Ys'
+                                'content-Type': 'application/json',
+                                'authorization': `Bearer ${AUTH_TOKEN}`  // usa o token fixo aqui
                             },
                             body: JSON.stringify(data)
                         });
@@ -184,7 +192,6 @@ textarea {
 
                         if (response.ok) {
                             const resultado = await response.text();
-                            alert(resultado)
                             console.log('Resposta do servidor:', resultado);
                             alert('Mensagem enviada com sucesso!');
                             form.reset();

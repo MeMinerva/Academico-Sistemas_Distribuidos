@@ -1,5 +1,5 @@
-const API_BASE_URL = 'https://withdrawal-attempt-fabrics-stock.trycloudflare.com'; 
-const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvYW8uc2lsdmFAZXhhbXBsZS5jb20iLCJuYW1laWQiOiIzIiwibmJmIjoxNzQ4OTY2NjMwLCJleHAiOjE3NDkwNTMwMzAsImlhdCI6MTc0ODk2NjYzMCwiaXNzIjoiV2hhdHNSdXJhbC5TZXJ2ZXIifQ.2t7zKBLJn-h40HBgw972MLYVba-rMg0bIiVv6mMB9Ys";
+const API_BASE_URL = 'https://withdrawal-attempt-fabrics-stock.trycloudflare.com';
+const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pbmVydmFAdWZycmouYnIiLCJuYW1laWQiOiIxMCIsIm5iZiI6MTc0OTA1MTI0MiwiZXhwIjoxNzQ5MTM3NjQyLCJpYXQiOjE3NDkwNTEyNDIsImlzcyI6IldoYXRzUnVyYWwuU2VydmVyIn0.lPKyP7zuGoebvwYNttCZxVJINQPR_QBqsEdhoPWMAcM";
 
 document.addEventListener("DOMContentLoaded", function () {
     const loginContainer = document.getElementById('login-container');
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'authentication': `bearer ${AUTH_TOKEN}`  // usa o token fixo aqui
+                            'authentication': `Bearer ${AUTH_TOKEN}`  // usa o token fixo aqui
                         },
                         body: JSON.stringify({ email, password })
                     });

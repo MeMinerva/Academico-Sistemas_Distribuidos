@@ -56,9 +56,11 @@
             color: var(--text-color);
         }
 
-        input[type="text"], input[type="email"] {
+        input[type="text"],
+        input[type="email"] {
             width: 100%;
-            padding: 0.6rem 0.8rem; /* MODIFICADO: Padding vertical reduzido */
+            padding: 0.6rem 0.8rem;
+            /* MODIFICADO: Padding vertical reduzido */
             font-family: 'Poppins', sans-serif;
             font-size: 0.9rem;
             border: 1px solid var(--border-color);
@@ -67,7 +69,8 @@
             background-color: var(--input-background);
         }
 
-        input[type="text"]:focus, input[type="email"]:focus {
+        input[type="text"]:focus,
+        input[type="email"]:focus {
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.25);
@@ -79,12 +82,14 @@
             flex-wrap: wrap;
             align-items: center;
             gap: 8px;
-            padding: 8px; /* Mantido o padding do container para espaçamento interno das tags */
+            padding: 8px;
+            /* Mantido o padding do container para espaçamento interno das tags */
             border: 1px solid var(--border-color);
             border-radius: var(--border-radius);
             background-color: var(--input-background);
             cursor: text;
-            min-height: 36px; /* Ajustado para acomodar o novo padding do input interno */
+            min-height: 36px;
+            /* Ajustado para acomodar o novo padding do input interno */
             max-height: 120px;
             overflow-y: auto;
             scrollbar-width: thin;
@@ -119,14 +124,17 @@
             align-items: center;
             background-color: var(--tag-bg-color);
             color: var(--tag-text-color);
-            padding: 3px 7px; /* Padding das tags ligeiramente ajustado */
-            border-radius: 10px; 
-            font-size: 0.8rem; /* Tamanho da fonte da tag ligeiramente ajustado */
+            padding: 3px 7px;
+            /* Padding das tags ligeiramente ajustado */
+            border-radius: 10px;
+            font-size: 0.8rem;
+            /* Tamanho da fonte da tag ligeiramente ajustado */
         }
 
         .remove-tag {
-            margin-left: 6px; /* Espaçamento do botão de remover ajustado */
-            width: 16px; 
+            margin-left: 6px;
+            /* Espaçamento do botão de remover ajustado */
+            width: 16px;
             height: 16px;
             background-color: #a0a0a0;
             color: white;
@@ -137,7 +145,8 @@
             align-items: center;
             justify-content: center;
             font-weight: bold;
-            font-size: 12px; /* Tamanho do 'x' ajustado */
+            font-size: 12px;
+            /* Tamanho do 'x' ajustado */
             line-height: 1;
             transition: background-color 0.2s;
         }
@@ -150,17 +159,22 @@
             border: none;
             outline: none;
             flex-grow: 1;
-            padding: 4px; /* Padding do input interno mantido para digitação confortável */
-            font-size: 0.9rem; /* Mantido */
-            min-width: 140px; /* Ajustado se necessário */
+            padding: 4px;
+            /* Padding do input interno mantido para digitação confortável */
+            font-size: 0.9rem;
+            /* Mantido */
+            min-width: 140px;
+            /* Ajustado se necessário */
             background-color: transparent;
         }
 
         /* --- ESTILOS PARA O BOTÃO --- */
         #criar-grupo-btn {
             width: 100%;
-            padding: 0.7rem 0.9rem; /* MODIFICADO: Padding vertical reduzido */
-            font-size: 0.95rem; /* Fonte ligeiramente ajustada para o novo padding */
+            padding: 0.7rem 0.9rem;
+            /* MODIFICADO: Padding vertical reduzido */
+            font-size: 0.95rem;
+            /* Fonte ligeiramente ajustada para o novo padding */
             font-weight: 600;
             color: #fff;
             background-color: var(--primary-color);
@@ -183,7 +197,7 @@
             color: white;
             padding: 10px 20px;
             border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
             z-index: 1000;
             display: none;
             font-size: 0.9rem;
@@ -213,8 +227,8 @@
     <div id="custom-alert-box" class="custom-alert"></div>
 
     <script>
-        const API_BASE_URL = 'https://piece-ic-gender-challenging.trycloudflare.com';
-        let AUTH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvYW8uc2lsdmFAZXhhbXBsZS5jb20iLCJuYW1laWQiOiIzIiwibmJmIjoxNzQ4OTY2NjMwLCJleHAiOjE3NDkwNTMwMzAsImlhdCI6MTc0ODk2NjYzMCwiaXNzIjoiV2hhdHNSdXJhbC5TZXJ2ZXIifQ.2t7zKBLJn-h40HBgw972MLYVba-rMg0bIiVv6mMB9Ys";
+        const API_BASE_URL = 'https://withdrawal-attempt-fabrics-stock.trycloudflare.com';
+        const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pbmVydmFAdWZycmouYnIiLCJuYW1laWQiOiIxMCIsIm5iZiI6MTc0OTA1MTI0MiwiZXhwIjoxNzQ5MTM3NjQyLCJpYXQiOjE3NDkwNTEyNDIsImlzcyI6IldoYXRzUnVyYWwuU2VydmVyIn0.lPKyP7zuGoebvwYNttCZxVJINQPR_QBqsEdhoPWMAcM";
 
         document.addEventListener('DOMContentLoaded', () => {
             const tagsContainer = document.getElementById('email-tags-container');
@@ -254,7 +268,7 @@
                             showAlert('Este e-mail já foi adicionado.', true);
                         }
                     } else if (email && !validateEmail(email)) {
-                         showAlert('Por favor, insira um e-mail válido.', true);
+                        showAlert('Por favor, insira um e-mail válido.', true);
                     }
                 } else if (e.key === 'Backspace' && emailInput.value === '' && participants.length > 0) {
                     participants.pop();
@@ -314,7 +328,7 @@
                     user_emails: participants
                 };
                 const url = `${API_BASE_URL}/groups`;
-                
+
                 document.getElementById('criar-grupo-btn').disabled = true;
                 document.getElementById('criar-grupo-btn').textContent = 'Criando...';
 
