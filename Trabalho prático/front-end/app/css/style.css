@@ -276,3 +276,167 @@ body, html {
     padding: 20px;
     color: #999;
 }
+
+/* --- ESTILO GERAL DO CONTAINER DO CHAT --- */
+#chat-container {
+    display: flex;
+    flex-direction: column; /* Organiza os filhos (cabeçalho, mensagens, input) verticalmente */
+    height: 100%; /* Ocupa toda a altura do seu container pai ('wrapper') */
+    background-color: #f0f2f5; /* Um cinza claro e neutro para o fundo */
+}
+
+/* --- CABEÇALHO DO CHAT --- */
+#chat-header {
+    padding: 10px 20px;
+    width: 100%; /* Garante que o cabeçalho ocupe toda a largura do container */
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #e0e0e0;
+    flex-shrink: 0; /* Impede que o cabeçalho encolha */
+    display: flex;
+    align-items: center;
+}
+
+#chat-header h4 {
+    margin: 0;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #333;
+}
+
+/* --- LISTA DE MENSAGENS (ÁREA PRINCIPAL) --- */
+#messages-list {
+    flex-grow: 1; /* Faz esta área crescer e ocupar o espaço disponível */
+    overflow-y: auto; /* Adiciona uma barra de rolagem quando as mensagens transbordam */
+    padding: 20px;
+    display: flex;
+    flex-direction: column; /* Empilha as mensagens verticalmente */
+    /* Dica: Descomente a linha abaixo para um fundo com padrão, como o do WhatsApp */
+    /* background-image: url('https://i.imgur.com/b4h2c3w.png'); */
+}
+
+/* --- BALÕES DE MENSAGEM (GERAL) --- */
+.message {
+    max-width: 65%; /* Cada balão de mensagem ocupa no máximo 65% da largura */
+    padding: 10px 15px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    position: relative;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    word-wrap: break-word; /* Garante que palavras longas quebrem a linha */
+}
+
+/* Estilo para o nome do remetente (útil em grupos) */
+.message .sender-name {
+    font-size: 0.8em;
+    font-weight: bold;
+    margin: 0 0 5px 0;
+    color: #3d3d3d; /* Cor um pouco mais escura para o nome */
+}
+
+/* O conteúdo principal da mensagem */
+.message .message-content {
+    margin: 0;
+    font-size: 1em;
+    line-height: 1.4;
+}
+
+/* O carimbo de data/hora */
+.message .message-timestamp {
+    font-size: 0.75em;
+    color: #999;
+    margin-top: 5px;
+    text-align: right;
+    display: block; /* Garante que o text-align funcione */
+}
+
+/* --- MENSAGENS ENVIADAS (DIREITA) --- */
+.message.sent {
+    align-self: flex-end; /* ALINHAMENTO À DIREITA */
+    background-color: #dcf8c6; /* Verde claro, estilo WhatsApp */
+    color: #303030;
+}
+/* Pequena "cauda" no balão enviado */
+.message.sent::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: -8px;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-left-color: #dcf8c6;
+    border-bottom-color: #dcf8c6;
+    border-right: 0;
+    border-top: 0;
+}
+
+
+/* --- MENSAGENS RECEBIDAS (ESQUERDA) --- */
+.message.received {
+    align-self: flex-start; /* ALINHAMENTO À ESQUERDA */
+    background-color: #ffffff; /* Branco */
+    color: #303030;
+}
+/* Pequena "cauda" no balão recebido */
+.message.received::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -8px;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-right-color: #ffffff;
+    border-bottom-color: #ffffff;
+    border-left: 0;
+    border-top: 0;
+}
+
+
+/* --- BARRA DE ENTRADA DE MENSAGEM --- */
+#message-input-container {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f9f9f9;
+    border-top: 1px solid #e0e0e0;
+    flex-shrink: 0; /* Impede que o input encolha */
+}
+
+#message-input {
+    flex-grow: 1; /* O campo de texto ocupa o espaço disponível */
+    border: none;
+    padding: 12px 15px;
+    border-radius: 20px; /* Bordas arredondadas */
+    background-color: #ffffff;
+    font-size: 1em;
+    outline: none; /* Remove a borda azul ao focar */
+    margin-right: 10px;
+    border: 1px solid #ddd;
+}
+
+#message-input:focus {
+    border-color: #007bff; /* Destaca a borda ao focar */
+}
+
+#send-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%; /* Botão perfeitamente redondo */
+    width: 45px;
+    height: 45px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    /* Para um ícone de envio (exigiria FontAwesome ou um SVG) */
+    /* content: '\f1d8'; font-family: 'FontAwesome'; */
+}
+
+#send-button:hover {
+    background-color: #b300b3;
+}
