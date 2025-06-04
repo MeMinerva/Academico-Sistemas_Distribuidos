@@ -438,7 +438,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Carrega lista e inicia polling a cada 5 segundos
                 config.fetchFunction();
-                pollingInterval = setInterval(config.fetchFunction, 5000);
+                pollingInterval = setInterval(config.fetchFunction, 2000);
                 console.log(`Polling iniciado para ${config.title}`);
 
                 // Evento do botão “+” (caso use Electron para novas conversas/grupos)
@@ -473,7 +473,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (chatContainer) {
                 chatContainer.innerHTML = `
                     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; padding: 20px;">
-                        <img src="icons/giphy.gif" id="gif" alt="GIF animado" style="width: 150px; height: auto; margin-bottom: 20px;" />
+                        <img src="icons/giphy.gif" id="gif" />
                         <h2 style="margin-bottom: 0; color: rgb(70, 70, 70);">✨ Aplicativo de mensagens ✨</h2>
                         <p style="margin-top: 5px; color: rgb(150, 150, 150);"><b>By: Pedrinho</b> e Maria <b>(Minerva)</b> Eduarda</p>
                         <p style="margin-top: 15px;">Esta é uma aplicação de chat desenvolvida com muito carinho!</p>
