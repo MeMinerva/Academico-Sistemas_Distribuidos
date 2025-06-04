@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,113 +9,199 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-color: #007bff;
-            --primary-hover-color: #0056b3;
-            --background-color: #f4f7f6;
-            --container-background: #ffffff;
-            --text-color: #333;
-            --border-color: #ccc;
-            --border-radius: 8px;
-            --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
         body {
+            background-color: rgba(245, 245, 245, 0.494);
             font-family: 'Poppins', sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 20px;
+        }
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            /* background-color: #68686824; */
+        }
+        #form-nova-conversa h3 {
+            text-align: center;
+            color: #333;
+            font-weight: 700;
+        }
+        #button-container {
             display: flex;
             justify-content: center;
-            align-items: center;
-            min-height: 100vh;
+            margin-top: 1rem;
         }
+        /* --- ESTILOS PARA O FORMULÁRIO --- */
 
-        .container {
-            background-color: var(--container-background);
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            width: 100%;
-            max-width: 500px;
-        }
+/* --- ESTILOS PARA O FORMULÁRIO --- */
 
-        h2 {
-            margin-top: 0;
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-            text-align: center;
-        }
+:root {
+    --primary-color: #ff00dd;
+    --primary-hover-color: #b300a4;
+    --text-color: #333;
+    --border-color: #ccc;
+    --border-radius: 8px;
+    --input-background: #fff;
+    --input-focus-border: #ff7de1;
+    --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
+/* #form-nova-conversa {
+    width: 90%;
+    max-width: 400px;
+    padding: 1.5rem;
+    background-color: #ffffff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
 
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
+.form-group {
+    margin-bottom: 1.25rem;
+} */
 
-        input[type="email"],
-        textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            font-family: 'Poppins', sans-serif;
-            box-sizing: border-box; /* Garante que padding não afete a largura total */
-            transition: border-color 0.3s;
-        }
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
 
-        input[type="email"]:focus,
-        textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
+/* Estilização para INPUT e TEXTAREA com tamanho vertical reduzido */
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 0.6rem; /* Reduzido */
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem; /* Reduzido */
+    color: var(--text-color);
+    background-color: var(--input-background);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-sizing: border-box;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
 
-        textarea {
-            height: 120px;
-            resize: vertical; /* Permite redimensionamento vertical */
-        }
+/* Efeito de FOCO para ambos */
+input[type="email"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px var(--input-focus-border);
+}
 
-        button {
-            display: block;
-            width: 100%;
-            padding: 0.9rem;
-            border: none;
-            border-radius: var(--border-radius);
-            background-color: var(--primary-color);
-            color: white;
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+/* Textarea com tamanho FIXO */
+textarea {
+    min-height: 100px;
+    resize: none; /* Impede o redimensionamento pelo usuário */
+}
 
-        button:hover {
-            background-color: var(--primary-hover-color);
-        }
+/* Estilização para o BOTÃO */
+#enviar-conversa {
+    width: 100%;
+    padding: 0.9rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+}
+
+#enviar-conversa:hover {
+    background-color: var(--primary-hover-color);
+}
+
+#enviar-conversa:active {
+    transform: scale(0.98);
+}
+
     </style>
 </head>
+
 <body>
     <main class="container">
         <form id="form-nova-conversa">
-            <h2>Adicionar Nova Conversa</h2>
-            
+            <h3>Adicionar Nova Conversa</h3>
+
             <div class="form-group">
                 <label for="email-contato">E-mail do Contato</label>
                 <input type="email" id="email-contato" name="email-contato" placeholder="exemplo@dominio.com" required>
             </div>
-            
+
             <div class="form-group">
                 <label for="input-mensagem">Mensagem</label>
-                <textarea id="input-mensagem" name="mensagem" placeholder="Digite sua mensagem aqui..." required></textarea>
+                <textarea id="input-mensagem" name="mensagem" placeholder="Digite sua mensagem aqui..."
+                    required></textarea>
             </div>
-            
-            <button type="submit" id="enviar-conversa">Enviar</button>
+            <div id="button-container">
+                <button type="submit" id="enviar-conversa">Enviar</button>
+            </div>
+
+
+            <script defer>
+                // 1. Seleciona o formulário e os campos do DOM
+                const form = document.getElementById('form-nova-conversa');
+                const emailInput = document.getElementById('email-contato');
+                const mensagemInput = document.getElementById('input-mensagem');
+
+                // 2. Adiciona o 'escutador' de evento ao formulário
+                form.addEventListener('submit', async (event) => {
+                    event.preventDefault(); // Previne o recarregamento da página
+
+                    // 3. Obtém os valores dos campos no momento do envio
+                    const emailContato = emailInput.value;
+                    const mensagem = mensagemInput.value;
+
+                    if (!emailContato.trim() || !mensagem.trim()) {
+                        alert('Por favor, preencha todos os campos.');
+                        return;
+                    }
+
+                    const data = {
+                        user_email: emailContato,
+                        content: mensagem,
+                        type: "PRIVATE"
+                    };
+                    const url = 'https://piece-ic-gender-challenging.trycloudflare.com/message'
+                    // alert(url)
+                    try {
+                        // 4. Usa backticks (`) para a URL e corrige o nome do header
+                        const response = await fetch(url, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                // 5. O header de autorização padrão é 'Authorization'
+                                'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvYW8uc2lsdmFAZXhhbXBsZS5jb20iLCJuYW1laWQiOiIzIiwibmJmIjoxNzQ4OTY2NjMwLCJleHAiOjE3NDkwNTMwMzAsImlhdCI6MTc0ODk2NjYzMCwiaXNzIjoiV2hhdHNSdXJhbC5TZXJ2ZXIifQ.2t7zKBLJn-h40HBgw972MLYVba-rMg0bIiVv6mMB9Ys'
+                            },
+                            body: JSON.stringify(data)
+                        });
+
+                        console.log('Status da resposta:', response.status);
+
+                        if (response.ok) {
+                            const resultado = await response.text();
+                            alert(resultado)
+                            console.log('Resposta do servidor:', resultado);
+                            alert('Mensagem enviada com sucesso!');
+                            form.reset();
+                        } else {
+                            const errorText = await response.text();
+                            console.error('Erro na resposta:', response.status, errorText);
+                            alert(`Erro: ${response.status} - ${errorText}`);
+                        }
+                    } catch (error) {
+                        console.error('Erro no fetch:', error);
+                        alert('Falha ao enviar a conversa: ' + error.message);
+                    }
+                });
+            </script>
         </form>
     </main>
+
 </body>
+
 </html>

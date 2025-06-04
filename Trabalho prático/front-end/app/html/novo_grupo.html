@@ -1,99 +1,356 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
-    <title>Novo Grupo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Novo Grupo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
+        /* --- ESTILOS GERAIS E PARA O FORMULÁRIO --- */
+        :root {
+            --primary-color: #28a745;
+            /* Cor verde para grupos */
+            --primary-hover-color: #218838;
+            --tag-bg-color: #e0e0e0;
+            --tag-text-color: #333;
+            --text-color: #333;
+            --border-color: #ccc;
+            --border-radius: 8px;
+            --input-background: #fff;
+            --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
         body {
+            background-color: rgba(245, 245, 245, 0.95);
             font-family: 'Poppins', sans-serif;
-            padding: 20px;
-            max-width: 500px;
-            margin: auto;
-        }
-        label {
-            display: block;
-            margin-top: 15px;
-        }
-        input, select, button {
-            width: 100%;
-            padding: 10px;
-            margin-top: 8px;
+            margin: 0;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
             box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
         }
-        select[multiple] {
-            height: 120px;
+
+
+
+        #form-novo-grupo h3 {
+            text-align: center;
+            color: var(--text-color);
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
         }
-        button {
-            margin-top: 20px;
-            background-color: #4CAF50;
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 0.6rem 0.8rem; /* MODIFICADO: Padding vertical reduzido */
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            box-sizing: border-box;
+            background-color: var(--input-background);
+        }
+
+        input[type="text"]:focus, input[type="email"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.25);
+        }
+
+        /* --- ESTILOS PARA O INPUT DE E-MAILS (TAGS) --- */
+        .email-tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px;
+            padding: 8px; /* Mantido o padding do container para espaçamento interno das tags */
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background-color: var(--input-background);
+            cursor: text;
+            min-height: 36px; /* Ajustado para acomodar o novo padding do input interno */
+            max-height: 120px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+        }
+
+        .email-tags-container::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .email-tags-container::-webkit-scrollbar-track {
+            background: #e9ecef;
+            border-radius: 6px;
+        }
+
+        .email-tags-container::-webkit-scrollbar-thumb {
+            background-color: var(--primary-color);
+            border-radius: 6px;
+            border: 1px solid #e9ecef;
+        }
+
+        .email-tags-container::-webkit-scrollbar-thumb:hover {
+            background-color: var(--primary-hover-color);
+        }
+
+        .email-tags-container:focus-within {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.25);
+        }
+
+        .email-tag {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--tag-bg-color);
+            color: var(--tag-text-color);
+            padding: 3px 7px; /* Padding das tags ligeiramente ajustado */
+            border-radius: 10px; 
+            font-size: 0.8rem; /* Tamanho da fonte da tag ligeiramente ajustado */
+        }
+
+        .remove-tag {
+            margin-left: 6px; /* Espaçamento do botão de remover ajustado */
+            width: 16px; 
+            height: 16px;
+            background-color: #a0a0a0;
             color: white;
             border: none;
+            border-radius: 50%;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 12px; /* Tamanho do 'x' ajustado */
+            line-height: 1;
+            transition: background-color 0.2s;
         }
-        button:hover {
-            background-color: #45a049;
+
+        .remove-tag:hover {
+            background-color: #777;
         }
-        h2 {
-            text-align: center;
+
+        #email-input-field {
+            border: none;
+            outline: none;
+            flex-grow: 1;
+            padding: 4px; /* Padding do input interno mantido para digitação confortável */
+            font-size: 0.9rem; /* Mantido */
+            min-width: 140px; /* Ajustado se necessário */
+            background-color: transparent;
+        }
+
+        /* --- ESTILOS PARA O BOTÃO --- */
+        #criar-grupo-btn {
+            width: 100%;
+            padding: 0.7rem 0.9rem; /* MODIFICADO: Padding vertical reduzido */
+            font-size: 0.95rem; /* Fonte ligeiramente ajustada para o novo padding */
+            font-weight: 600;
+            color: #fff;
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        #criar-grupo-btn:hover {
+            background-color: var(--primary-hover-color);
+        }
+
+        .custom-alert {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            display: none;
+            font-size: 0.9rem;
         }
     </style>
 </head>
+
 <body>
-
-    <h2>Criar Novo Grupo</h2>
-
     <form id="form-novo-grupo">
-        <label for="nome-grupo">Nome do Grupo</label>
-        <input type="text" id="nome-grupo" placeholder="Digite o nome do grupo" required>
+        <h3>Criar Novo Grupo</h3>
 
-        <label for="usuarios-grupo">Selecione os Usuários</label>
-        <select id="usuarios-grupo" multiple required>
-            <!-- Opções serão preenchidas via JavaScript -->
-        </select>
+        <div class="form-group">
+            <label for="group-name-input">Nome do Grupo</label>
+            <input type="text" id="group-name-input" placeholder="Ex: Grupo do Trabalho" required>
+        </div>
 
-        <button type="submit">Criar Grupo</button>
+        <div class="form-group">
+            <label for="email-input-field">Participantes</label>
+            <div class="email-tags-container" id="email-tags-container">
+                <input type="email" id="email-input-field" placeholder="Digite um e-mail e tecle Enter">
+            </div>
+        </div>
+
+        <button type="submit" id="criar-grupo-btn">Criar Grupo</button>
     </form>
 
+    <div id="custom-alert-box" class="custom-alert"></div>
+
     <script>
-        // Exemplo de usuários (trocar por fetch se for dinâmico)
-        const usuarios = [
-            { id: 1, nome: 'Maria' },
-            { id: 2, nome: 'João' },
-            { id: 3, nome: 'Pedro' },
-            { id: 4, nome: 'Ana' }
-        ];
+        const API_BASE_URL = 'https://piece-ic-gender-challenging.trycloudflare.com';
+        let authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvYW8uc2lsdmFAZXhhbXBsZS5jb20iLCJuYW1laWQiOiIzIiwibmJmIjoxNzQ4OTY2NjMwLCJleHAiOjE3NDkwNTMwMzAsImlhdCI6MTc0ODk2NjYzMCwiaXNzIjoiV2hhdHNSdXJhbC5TZXJ2ZXIifQ.2t7zKBLJn-h40HBgw972MLYVba-rMg0bIiVv6mMB9Ys";
 
-        const select = document.getElementById('usuarios-grupo');
+        document.addEventListener('DOMContentLoaded', () => {
+            const tagsContainer = document.getElementById('email-tags-container');
+            const emailInput = document.getElementById('email-input-field');
+            const groupNameInput = document.getElementById('group-name-input');
+            const form = document.getElementById('form-novo-grupo');
+            const customAlertBox = document.getElementById('custom-alert-box');
 
-        usuarios.forEach(user => {
-            const option = document.createElement('option');
-            option.value = user.id;
-            option.textContent = user.nome;
-            select.appendChild(option);
-        });
+            let participants = [];
 
-        document.getElementById('form-novo-grupo').addEventListener('submit', (e) => {
-            e.preventDefault();
+            function showAlert(message, isError = false) {
+                customAlertBox.textContent = message;
+                customAlertBox.style.backgroundColor = isError ? '#d9534f' : '#5cb85c';
+                customAlertBox.style.display = 'block';
+                setTimeout(() => {
+                    customAlertBox.style.display = 'none';
+                }, 3000);
+            }
 
-            const nomeGrupo = document.getElementById('nome-grupo').value;
-            const usuariosSelecionados = Array.from(select.selectedOptions).map(opt => opt.value);
-
-            console.log('Nome do grupo:', nomeGrupo);
-            console.log('Usuários selecionados:', usuariosSelecionados);
-
-            // Aqui você pode usar fetch ou ipcRenderer para enviar os dados
-            // Exemplo com Electron (descomente se estiver usando):
-            /*
-            const { ipcRenderer } = require('electron');
-            ipcRenderer.send('criar-grupo', {
-                nome: nomeGrupo,
-                usuarios: usuariosSelecionados
+            tagsContainer.addEventListener('click', (e) => {
+                if (e.target.id === 'email-tags-container' || e.target.id === 'email-input-field') {
+                    emailInput.focus();
+                }
             });
-            */
+
+            emailInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ',') {
+                    e.preventDefault();
+                    const email = emailInput.value.trim();
+
+                    if (email && validateEmail(email)) {
+                        if (!participants.includes(email)) {
+                            participants.push(email);
+                            renderTags();
+                            emailInput.value = '';
+                        } else {
+                            showAlert('Este e-mail já foi adicionado.', true);
+                        }
+                    } else if (email && !validateEmail(email)) {
+                         showAlert('Por favor, insira um e-mail válido.', true);
+                    }
+                } else if (e.key === 'Backspace' && emailInput.value === '' && participants.length > 0) {
+                    participants.pop();
+                    renderTags();
+                }
+            });
+
+            function renderTags() {
+                tagsContainer.querySelectorAll('.email-tag').forEach(tag => tag.remove());
+                participants.forEach(email => {
+                    const tagElement = createTag(email);
+                    tagsContainer.insertBefore(tagElement, emailInput);
+                });
+                emailInput.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+
+            function createTag(email) {
+                const tag = document.createElement('span');
+                tag.className = 'email-tag';
+                tag.textContent = email;
+
+                const removeBtn = document.createElement('button');
+                removeBtn.className = 'remove-tag';
+                removeBtn.textContent = '×';
+                removeBtn.setAttribute('aria-label', `Remover ${email}`);
+                removeBtn.type = 'button';
+                removeBtn.addEventListener('click', () => {
+                    participants = participants.filter(p => p !== email);
+                    renderTags();
+                    emailInput.focus();
+                });
+
+                tag.appendChild(removeBtn);
+                return tag;
+            }
+
+            function validateEmail(email) {
+                const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(String(email).toLowerCase());
+            }
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const groupName = groupNameInput.value.trim();
+
+                if (!groupName) {
+                    showAlert('Por favor, informe um nome para o grupo.', true);
+                    return;
+                }
+                if (participants.length === 0) {
+                    showAlert('Adicione pelo menos um participante.', true);
+                    return;
+                }
+
+                const data = {
+                    name: groupName,
+                    user_emails: participants
+                };
+                const url = `${API_BASE_URL}/groups`;
+                
+                document.getElementById('criar-grupo-btn').disabled = true;
+                document.getElementById('criar-grupo-btn').textContent = 'Criando...';
+
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${authToken}`
+                        },
+                        body: JSON.stringify(data)
+                    });
+
+                    console.log('Status da resposta:', response.status);
+                    const responseBody = await response.text();
+
+                    if (response.ok) {
+                        showAlert(responseBody || 'Grupo criado com sucesso!');
+                        console.log('Resposta do servidor:', responseBody);
+                        form.reset();
+                        participants = [];
+                        renderTags();
+                    } else {
+                        console.error('Erro na resposta:', response.status, responseBody);
+                        showAlert(`Erro: ${response.status} - ${responseBody || 'Falha ao criar grupo.'}`, true);
+                    }
+                } catch (error) {
+                    console.error('Erro no fetch:', error);
+                    showAlert('Falha ao conectar com o servidor: ' + error.message, true);
+                } finally {
+                    document.getElementById('criar-grupo-btn').disabled = false;
+                    document.getElementById('criar-grupo-btn').textContent = 'Criar Grupo';
+                }
+            });
         });
     </script>
-
 </body>
+
 </html>
