@@ -74,63 +74,80 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
     fetch('html/registerpage.html')
-        .then(response => response.text())
-        .then(data => {
-            registerContainer.innerHTML = data;
+    .then(response => response.text())
+    .then(data => {
+        registerContainer.innerHTML = data;
 
-            const backToLogin = document.getElementById('back-to-login');
-            const registerButton = document.getElementById('register-button');
+        const backToLogin = document.getElementById('back-to-login');
+        const registerButton = document.getElementById('register-button');
 
-            backToLogin.addEventListener('click', () => {
-                registerContainer.style.display = 'none';
-                loginContainer.style.display = 'flex';
-                document.getElementById('register-error').style.display = 'none';
-            });
+        backToLogin.addEventListener('click', () => {
+            registerContainer.style.display = 'none';
+            loginContainer.style.display = 'flex';
+            document.getElementById('register-error').style.display = 'none';
+        });
 
-            registerButton.addEventListener('click', async () => {
-                const newUsername = document.getElementById('new-username').value;
-                const newPassword = document.getElementById('new-password').value;
-                const newEmail = document.getElementById('new-email').value;
+        registerButton.addEventListener('click', async () => {
+            const newUsername = document.getElementById('new-username').value;
+            const newPassword = document.getElementById('new-password').value;
+            const newEmail = document.getElementById('new-email').value;
 
-                const errorBox = document.getElementById('register-error');
-                errorBox.style.display = 'none';
+            const errorBox = document.getElementById('register-error');
+            errorBox.style.display = 'none';
 
-                try {
-                    const response = await fetch(`${API_BASE_URL}/register`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                             // <<< ALTERAÇÃO: Cabeçalho de autenticação removido daqui.
-                        },
-                        body: JSON.stringify({
-                            name: newUsername,
-                            email: newEmail,
-                            password: newPassword
-                        })
-                    });
+            try {
+                const response = await fetch(`${API_BASE_URL}/register`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name: newUsername,
+                        email: newEmail,
+                        password: newPassword
+                    })
+                });
 
-                    if (response.ok) {
-                        // <<< ALTERAÇÃO: Se o registro retornar um token, armazene-o.
-                        const responseData = await response.json();
-                        if (responseData.token) {
-                            localStorage.setItem('authToken', responseData.token); // Salva o token
-                        }
-                        localStorage.setItem('loggedIn', 'true');
-                        updateView();
-                    } else if (response.status === 409) {
-                        errorBox.textContent = 'Usuário já existe.';
-                        errorBox.style.display = 'block';
-                    } else {
-                        errorBox.textContent = 'Erro ao registrar.';
-                        errorBox.style.display = 'block';
+                if (response.ok) {
+                    // Registro bem-sucedido: retorna para a tela de login
+                    
+                    // Esconde a tela de registro
+                    registerContainer.style.display = 'none';
+                    
+                    // Mostra a tela de login
+                    loginContainer.style.display = 'flex';
+
+                    // Exibe uma mensagem de sucesso temporária na tela de login
+                    const loginErrorElement = document.getElementById('login-error');
+                    if (loginErrorElement) {
+                        loginErrorElement.textContent = 'Usuário registrado com sucesso! Faça o login.';
+                        loginErrorElement.style.color = 'green'; // Muda a cor para verde para indicar sucesso
+                        loginErrorElement.style.display = 'block';
+
+                        // Opcional: faz a mensagem de sucesso desaparecer após alguns segundos
+                        setTimeout(() => {
+                           if(loginErrorElement.textContent === 'Usuário registrado com sucesso! Faça o login.'){
+                                loginErrorElement.style.display = 'none';
+                                loginErrorElement.style.color = ''; // Reseta a cor
+                           }
+                        }, 5000); // 5 segundos
                     }
-                } catch (error) {
-                    console.error('Erro na requisição de registro:', error);
-                    errorBox.textContent = 'Erro de conexão com o servidor.';
+
+                } else if (response.status === 409) {
+                    errorBox.textContent = 'Este e-mail já está em uso.';
+                    errorBox.style.display = 'block';
+                } else {
+                    const errorData = await response.text();
+                    errorBox.textContent = `Erro ao registrar: ${errorData}`;
                     errorBox.style.display = 'block';
                 }
-            });
+            } catch (error) {
+                console.error('Erro na requisição de registro:', error);
+                errorBox.textContent = 'Erro de conexão com o servidor.';
+                errorBox.style.display = 'block';
+            }
         });
+    });
 
     updateView();
 });
