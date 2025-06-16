@@ -1,5 +1,8 @@
-const API_BASE_URL = 'https://withdrawal-attempt-fabrics-stock.trycloudflare.com';
-const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pbmVydmFAdWZycmouYnIiLCJuYW1laWQiOiIxMCIsIm5iZiI6MTc0OTA1MTI0MiwiZXhwIjoxNzQ5MTM3NjQyLCJpYXQiOjE3NDkwNTEyNDIsImlzcyI6IldoYXRzUnVyYWwuU2VydmVyIn0.lPKyP7zuGoebvwYNttCZxVJINQPR_QBqsEdhoPWMAcM";
+const API_BASE_URL = 'https://rpc.pedrohdncorrea.com.br';
+const AUTH_TOKEN = localStorage.getItem('authToken');
+
+console.log(AUTH_TOKEN)
+// const AUTH_TOKEN = "..." // <<< ALTERAÇÃO: Token fixo removido.
 
 document.addEventListener("DOMContentLoaded", function () {
     const loginContainer = document.getElementById('login-container');
@@ -41,20 +44,30 @@ document.addEventListener("DOMContentLoaded", function () {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'authentication': `Bearer ${AUTH_TOKEN}`  // usa o token fixo aqui
+                            // <<< ALTERAÇÃO: Cabeçalho de autenticação removido daqui.
                         },
                         body: JSON.stringify({ email, password })
                     });
 
                     if (response.ok) {
-                        // Marca como logado localmente
-                        localStorage.setItem('loggedIn', 'true');
-                        updateView();
+                        // <<< ALTERAÇÃO: Captura e armazena o token retornado pela API.
+                        const responseData = await response.json(); 
+                        if (responseData.token) {
+                            localStorage.setItem('authToken', responseData.token); // Salva o token
+                            localStorage.setItem('loggedIn', 'true');
+                            updateView();
+                        } else {
+                            // Caso a resposta seja OK, mas não contenha um token
+                            document.getElementById('login-error').textContent = 'Erro: Token não recebido do servidor.';
+                            document.getElementById('login-error').style.display = 'block';
+                        }
                     } else {
+                        document.getElementById('login-error').textContent = 'Email ou senha inválidos.';
                         document.getElementById('login-error').style.display = 'block';
                     }
                 } catch (error) {
                     console.error('Erro na requisição de login:', error);
+                    document.getElementById('login-error').textContent = 'Erro de conexão.';
                     document.getElementById('login-error').style.display = 'block';
                 }
             });
@@ -87,7 +100,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'authentication': `bearer ${AUTH_TOKEN}`  // token fixo aqui também
+                             // <<< ALTERAÇÃO: Cabeçalho de autenticação removido daqui.
                         },
                         body: JSON.stringify({
                             name: newUsername,
@@ -97,6 +110,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     });
 
                     if (response.ok) {
+                        // <<< ALTERAÇÃO: Se o registro retornar um token, armazene-o.
+                        const responseData = await response.json();
+                        if (responseData.token) {
+                            localStorage.setItem('authToken', responseData.token); // Salva o token
+                        }
                         localStorage.setItem('loggedIn', 'true');
                         updateView();
                     } else if (response.status === 409) {
