@@ -1,216 +1,190 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Iniciar Nova Conversa</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        body {
-            background-color: rgba(245, 245, 245, 0.494);
-            font-family: 'Poppins', sans-serif;
-        }
+      body {
+        background-color: rgba(245, 245, 245, 0.494);
+        font-family: "Poppins", sans-serif;
+      }
 
-        .container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            /* background-color: #68686824; */
-        }
+      .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
 
-        #form-nova-conversa h3 {
-            text-align: center;
-            color: #333;
-            font-weight: 700;
-        }
+      #form-nova-conversa h3 {
+        text-align: center;
+        color: #333;
+        font-weight: 700;
+      }
 
-        #button-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 1rem;
-        }
+      #button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+      }
 
-        /* --- ESTILOS PARA O FORMULÁRIO --- */
+      :root {
+        --primary-color: #ff00dd;
+        --primary-hover-color: #b300a4;
+        --text-color: #333;
+        --border-color: #ccc;
+        --border-radius: 8px;
+        --input-background: #fff;
+        --input-focus-border: #ff7de1;
+        --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
 
-        /* --- ESTILOS PARA O FORMULÁRIO --- */
+      .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        color: var(--text-color);
+      }
 
-        :root {
-            --primary-color: #ff00dd;
-            --primary-hover-color: #b300a4;
-            --text-color: #333;
-            --border-color: #ccc;
-            --border-radius: 8px;
-            --input-background: #fff;
-            --input-focus-border: #ff7de1;
-            --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
+      input[type="email"],
+      textarea {
+        width: 100%;
+        padding: 0.6rem;
+        font-family: "Poppins", sans-serif;
+        font-size: 0.9rem;
+        color: var(--text-color);
+        background-color: var(--input-background);
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius);
+        box-sizing: border-box;
+        transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+      }
 
-        /* #form-nova-conversa {
-    width: 90%;
-    max-width: 400px;
-    padding: 1.5rem;
-    background-color: #ffffff;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-}
+      input[type="email"]:focus,
+      textarea:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px var(--input-focus-border);
+      }
 
-.form-group {
-    margin-bottom: 1.25rem;
-} */
+      textarea {
+        min-height: 100px;
+        resize: none;
+      }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--text-color);
-        }
+      #enviar-conversa {
+        width: 100%;
+        padding: 0.9rem;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #fff;
+        background-color: var(--primary-color);
+        border: none;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+      }
 
-        /* Estilização para INPUT e TEXTAREA com tamanho vertical reduzido */
-        input[type="email"],
-        textarea {
-            width: 100%;
-            padding: 0.6rem;
-            /* Reduzido */
-            font-family: 'Poppins', sans-serif;
-            font-size: 0.9rem;
-            /* Reduzido */
-            color: var(--text-color);
-            background-color: var(--input-background);
-            border: 1px solid var(--border-color);
-            border-radius: var(--border-radius);
-            box-sizing: border-box;
-            transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-        }
+      #enviar-conversa:hover {
+        background-color: var(--primary-hover-color);
+      }
 
-        /* Efeito de FOCO para ambos */
-        input[type="email"]:focus,
-        textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px var(--input-focus-border);
-        }
-
-        /* Textarea com tamanho FIXO */
-        textarea {
-            min-height: 100px;
-            resize: none;
-            /* Impede o redimensionamento pelo usuário */
-        }
-
-        /* Estilização para o BOTÃO */
-        #enviar-conversa {
-            width: 100%;
-            padding: 0.9rem;
-            font-size: 1rem;
-            font-weight: 600;
-            color: #fff;
-            background-color: var(--primary-color);
-            border: none;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            transition: background-color 0.2s ease-in-out, transform 0.1s ease;
-        }
-
-        #enviar-conversa:hover {
-            background-color: var(--primary-hover-color);
-        }
-
-        #enviar-conversa:active {
-            transform: scale(0.98);
-        }
+      #enviar-conversa:active {
+        transform: scale(0.98);
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <main class="container">
-        <form id="form-nova-conversa">
-            <h3>Adicionar Nova Conversa</h3>
+      <form id="form-nova-conversa">
+        <h3>Adicionar Nova Conversa</h3>
 
-            <div class="form-group">
-                <label for="email-contato">E-mail do Contato</label>
-                <input type="email" id="email-contato" name="email-contato" placeholder="exemplo@dominio.com" required>
-            </div>
+        <div class="form-group">
+          <label for="email-contato">E-mail do Contato</label>
+          <input
+            type="email"
+            id="email-contato"
+            name="email-contato"
+            placeholder="exemplo@dominio.com"
+            required
+          />
+        </div>
 
-            <div class="form-group">
-                <label for="input-mensagem">Mensagem</label>
-                <textarea id="input-mensagem" name="mensagem" placeholder="Digite sua mensagem aqui..."
-                    required></textarea>
-            </div>
-            <div id="button-container">
-                <button type="submit" id="enviar-conversa">Enviar</button>
-            </div>
+        <div class="form-group">
+          <label for="input-mensagem">Mensagem</label>
+          <textarea
+            id="input-mensagem"
+            name="mensagem"
+            placeholder="Digite sua mensagem aqui..."
+            required
+          ></textarea>
+        </div>
+        <div id="button-container">
+          <button type="submit" id="enviar-conversa">Enviar</button>
+        </div>
 
+        <script defer>
+          const API_BASE_URL = "https://rpc.pedrohdncorrea.com.br";
+          const AUTH_TOKEN = localStorage.getItem("authToken");
 
-            <script defer>
-                const API_BASE_URL = 'https://rpc.pedrohdncorrea.com.br';
-                const AUTH_TOKEN = localStorage.getItem('authToken');
-                // const API_BASE_URL = 'http://127.0.0.1:8000';
-                // const AUTH_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pbmVydmFAdWZycmouYnIiLCJuYW1laWQiOiIxMCIsIm5iZiI6MTc0OTA1MTI0MiwiZXhwIjoxNzQ5MTM3NjQyLCJpYXQiOjE3NDkwNTEyNDIsImlzcyI6IldoYXRzUnVyYWwuU2VydmVyIn0.lPKyP7zuGoebvwYNttCZxVJINQPR_QBqsEdhoPWMAcM";
+          const form = document.getElementById("form-nova-conversa");
+          const emailInput = document.getElementById("email-contato");
+          const mensagemInput = document.getElementById("input-mensagem");
 
-                // 1. Seleciona o formulário e os campos do DOM
-                const form = document.getElementById('form-nova-conversa');
-                const emailInput = document.getElementById('email-contato');
-                const mensagemInput = document.getElementById('input-mensagem');
+          form.addEventListener("submit", async (event) => {
+            event.preventDefault();
 
-                // 2. Adiciona o 'escutador' de evento ao formulário
-                form.addEventListener('submit', async (event) => {
-                    event.preventDefault(); // Previne o recarregamento da página
+            const emailContato = emailInput.value;
+            const mensagem = mensagemInput.value;
 
-                    // 3. Obtém os valores dos campos no momento do envio
-                    const emailContato = emailInput.value;
-                    const mensagem = mensagemInput.value;
+            if (!emailContato.trim() || !mensagem.trim()) {
+              alert("Por favor, preencha todos os campos.");
+              return;
+            }
 
-                    if (!emailContato.trim() || !mensagem.trim()) {
-                        alert('Por favor, preencha todos os campos.');
-                        return;
-                    }
+            const data = {
+              user_email: emailContato,
+              content: mensagem,
+              type: "PRIVATE",
+            };
 
-                    const data = {
-                        user_email: emailContato,
-                        content: mensagem,
-                        type: "PRIVATE"
-                    };
-                    const url = `${API_BASE_URL}/message`; // Corrigido para usar backticks
-                    // alert(url)
-                    try {
-                        // 4. Usa backticks (`) para a URL e corrige o nome do header
-                        const response = await fetch(url, {
-                            method: 'POST',
-                            headers: {
-                                'content-Type': 'application/json',
-                                'authorization': `Bearer ${AUTH_TOKEN}`  // usa o token fixo aqui
-                            },
-                            body: JSON.stringify(data)
-                        });
+            const url = `${API_BASE_URL}/message`;
 
-                        console.log('Status da resposta:', response.status);
+            try {
+              const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                  "content-Type": "application/json",
+                  authorization: `Bearer ${AUTH_TOKEN}`,
+                },
+                body: JSON.stringify(data),
+              });
 
-                        if (response.ok) {
-                            const resultado = await response.text();
-                            console.log('Resposta do servidor:', resultado);
-                            alert('Mensagem enviada com sucesso!');
-                            form.reset();
-                        } else {
-                            const errorText = await response.text();
-                            console.error('Erro na resposta:', response.status, errorText);
-                            alert(`Erro: ${response.status} - ${errorText}`);
-                        }
-                    } catch (error) {
-                        console.error('Erro no fetch:', error);
-                        alert('Falha ao enviar a conversa: ' + error.message);
-                    }
-                });
-            </script>
-        </form>
+              if (response.ok) {
+                const resultado = await response.text();
+                alert("Mensagem enviada com sucesso!");
+                form.reset();
+              } else {
+                const errorText = await response.text();
+                alert(`Erro: ${response.status} - ${errorText}`);
+              }
+            } catch (error) {
+              alert("Falha ao enviar a conversa: " + error.message);
+            }
+          });
+        </script>
+      </form>
     </main>
-
-</body>
-
+  </body>
 </html>
